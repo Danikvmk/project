@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HEAD Request Test</title>
+    <style>
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>HEAD Request Test</h1>
+    <button id="testButton">Test HEAD Request</button>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('testButton').addEventListener('click', function() {
+            const url = 'http://localhost:8080/index.html';
+            const responseContainer = document.getElementById('response');
+
+            fetch(url, {
+                method: 'HEAD'
+            })
+            .then(response => {
+                const headers = [];
+                for (const [key, value] of response.headers.entries()) {
+                    headers.push(${key}: ${value});
+                }
+
+                const message = `
+                    <strong>Response Status:</strong> ${response.status} ${response.statusText}<br>
+                    <strong>Headers:</strong> <pre>${headers.join('\n')}</pre>
+                `;
+                responseContainer.innerHTML = message;
+            })
+            .catch(error => {
+                console.error('Error making HEAD request:', error);
+                responseContainer.innerHTML = <strong>Error making HEAD request:</strong> ${error};
+            });
+        });
+    </script>
+</body>
+</html>

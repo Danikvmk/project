@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HEAD Request Example</title>
+</head>
+<body>
+    <script>
+        function sendHeadRequest() {
+            fetch('http://localhost:8080', {
+                method: 'HEAD' 
+            })
+            .then(response => {
+                console.log(response.headers.get('Content-Type'));
+            })
+            .catch(error => console.error('Ошибка:', error));
+        }
+        window.onload = sendHeadRequest;
+    </script>
+</body>
+</html>
